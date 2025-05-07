@@ -12,7 +12,7 @@
 -- See the License for the specific language governing permissions and
 -- limitations under the License.
 
--- Defining the schema that will contain all functions.
+-- Defining schema that will contain all functions.
 CREATE OR REPLACE SCHEMA mysql;
 
 -- NAME : DEGREES
