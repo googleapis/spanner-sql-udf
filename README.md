@@ -114,7 +114,7 @@ Modifying UDFs
 
 Removing UDFs
 - Use the DROP FUNCTION function_name statement to delete a UDF.
--
+
 ## Limitations
 
 - **Unique Naming (No Overloading):** You cannot overload User-Defined
