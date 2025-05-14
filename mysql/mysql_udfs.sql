@@ -12,6 +12,10 @@
 -- See the License for the specific language governing permissions and
 -- limitations under the License.
 
+-- Defining schema that will contain all functions.
+CREATE OR REPLACE SCHEMA mysql;
+
+-- [START MYSQL_UDF_NUMERIC_DEGREES]
 -- NAME : DEGREES
 -- TYPE : NUMERIC
 -- DESCRIPTION : Convert radians to degrees.
@@ -19,6 +23,7 @@
 -- PARAMETERS : x - The input angle in radians (FLOAT64).
 -- DIFFERENCE FROM MYSQL :
 -- LIMITATIONS : May overflow with very large values (greater than 1e300)
+-- [END MYSQL_UDF_NUMERIC_DEGREES]
 CREATE OR REPLACE FUNCTION mysql.DEGREES(x FLOAT64)
 RETURNS FLOAT64
 AS (
