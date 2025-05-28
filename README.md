@@ -3,9 +3,9 @@
 This repository contains a package of Spanner User-Defined Functions (UDFs) for
 many MySQL built-in functions. Combined with Spanner's existing built-in
 functions, these UDFs provide coverage for most of MySQL's built-in functions.
-When you migrate from MySQL to Spanner, you can use these UDFs to use MySQL
-built-in functions that Spanner doesn't support. This reduces the effort to
-migrate your application code and queries.
+When migrating from MySQL to Spanner, these UDFs allow you to continue using 
+MySQL functions not natively supported by Spanner, significantly reducing the 
+effort required to adapt your application code and queries.
 
 ## Features
 
@@ -87,14 +87,14 @@ Spanner supports the following UDFs:
 
 -   The package consists of a batch of DDL statements that creates a MySQL
     namespace and defines UDF functions for many MySQL built-in functions.
--   Run this batch of DDL statements as you would make any other schema update.
+-   Run this batch of DDL statements as you would make any other [schema update](https://cloud.google.com/spanner/docs/schema-updates).
     For example, you can cut-and-paste the
     [mysql_udfs.sql](https://github.com/googleapis/spanner-sql-udf/blob/main/mysql/mysql_udfs.sql)
     file into the Spanner Studio page and click Run.
 
 ## Customize the package
 
--   If you know which functions you'll need, Spanner recommends customizing the
+-   If you know which functions you'll need, we recommend customizing the
     mysql_udfs.sql file to include those UDF functions you need.
 -   If you customize the mysql_udfs.sql file, make sure that you retain the
     create schema statement or ensure that your database has an appropriate
@@ -112,15 +112,15 @@ DELETE).
     name e.g. SELECT mysql.PI().
 
 -   **Simplified Invocation**: You can call UDFs by their function name alone by
-    configuring your udf search path. For example `ALTER DATABASE mydatabase SET
-    OPTIONS(udf_search_path=['mysql']);` will configure the udf search path for
+    configuring your UDF search path. For example `ALTER DATABASE mydatabase SET
+    OPTIONS(udf_search_path=['mysql']);` will configure the UDF search path for
     mydatabase so that `SELECT mysql.PI()` can be simplified to `SELECT PI()`.
 
 ## Removing UDFs
 
 -   Use the DROP FUNCTION statement to delete a UDF:
 
-    DROP FUNCTION [function_name];
+    DROP FUNCTION [function_name]; For example, DROP FUNCTION mysql.DEGREES;
 
 ## Status of UDF package availability
 
