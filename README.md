@@ -1,30 +1,137 @@
 # spanner-sql-udf
 
-This repository contains a set of Spanner User-Defined Functions (UDFs) for a
-number of MySQL built-in functions. Combined together with Spanner's existing
-built-in functions, they provide coverage for most of MySQL's built-in
-functions. These UDFs are designed to assist customers migrating applications
-from MySQL to Spanner by providing definitions for MySQL built-in functions not
-already supported in Spanner, reducing the effort to migrate application code
-and queries.
+This repository contains a package of Spanner User-Defined Functions (UDFs) for
+many MySQL built-in functions. Combined with Spanner's existing built-in
+functions, these UDFs provide coverage for most of MySQL's built-in functions.
+When migrating from MySQL to Spanner, these UDFs allow you to continue using 
+MySQL functions not natively supported by Spanner, significantly reducing the 
+effort required to adapt your application code and queries.
 
-Spanner’s support for UDFs will be available soon.
+## Features
 
-## Features & Limitations
+Spanner supports the following UDFs:
 
-Supported list of User-Defined Functions (UDFs)
-
+- BIN_TO_UUID
+- BIT_LENGTH
+- CHAR
+- CONCAT_WS
+- DATE_FORMAT
+- DATEDIFF
 - DAY
 - DAYNAME
 - DAYOFMONTH
 - DAYOFWEEK
 - DAYOFYEAR
+- DEGREES
+- FROM_DAYS
+- FROM_UNIXTIME
+- HEX
+- HOUR
+- INET6_ATON
+- INET6_NTOA
+- INET_ATON
+- INET_NTOA
+- INSERT
+- IS_IPV4
+- IS_IPV4_COMPAT
+- IS_IPV4_MAPPED
+- IS_IPV6
+- IS_UUID
+- JSON_QUOTE
+- JSON_UNQUOTE
+- LOCALTIME
+- LOCALTIMESTAMP
+- LOCATE
+- LOG2
+- MAKEDATE
+- MICROSECOND
+- MID
+- MINUTE
+- MONTH
+- MONTHNAME
+- NOW
+- OCT
+- ORD
+- PERIOD_ADD
+- PERIOD_DIFF
+- PI
+- POSITION
+- QUARTER
+- QUOTE
+- RADIANS
+- REGEXP_LIKE
+- REGEXP_SUBSTR
+- SECOND
+- SHA2
+- SPACE
+- STRCMP
+- STR_TO_DATE
+- SUBSTRING_INDEX
+- SYSDATE
+- TIME
+- TO_DAYS
+- TO_SECONDS
+- TRUNCATE
+- UNHEX
+- UNIX_TIMESTAMP
+- UTC_DATE
+- UTC_TIMESTAMP
+- UUID
+- UUID_TO_BIN
+- WEEK
+- WEEKDAY
+- WEEKOFYEAR
+- YEAR
 
-Limitations:
+## Install the package
 
-- Each UDF definition is accompanied by detailed documentation, including any
-  differences between the UDF and the corresponding MySQL built-in function, and
-  any limitations of the UDF.
+-   The package consists of a batch of DDL statements that creates a MySQL
+    namespace and defines UDF functions for many MySQL built-in functions.
+-   Run this batch of DDL statements as you would make any other [schema update](https://cloud.google.com/spanner/docs/schema-updates).
+    For example, you can cut-and-paste the
+    [mysql_udfs.sql](https://github.com/googleapis/spanner-sql-udf/blob/main/mysql/mysql_udfs.sql)
+    file into the Spanner Studio page and click Run.
+
+## Customize the package
+
+-   If you know which functions you'll need, we recommend customizing the
+    mysql_udfs.sql file to include those UDF functions you need.
+-   If you customize the mysql_udfs.sql file, make sure that you retain the
+    create schema statement or ensure that your database has an appropriate
+    schema defined. Spanner does not support creating UDF functions in the
+    default schema.
+
+## Calling UDFs
+
+You can invoke SQL UDFs similarly to built-in functions within your queries or
+Data Manipulation Language (DML) statements (for example, INSERT, UPDATE, or
+DELETE).
+
+-   **Standard Invocation**: To call these UDFs, you generally need the fully
+    qualified name, which comprises the schema name followed by the function
+    name e.g. SELECT mysql.PI().
+
+-   **Simplified Invocation**: You can call UDFs by their function name alone by
+    configuring your UDF search path. For example `ALTER DATABASE mydatabase SET
+    OPTIONS(udf_search_path=['mysql']);` will configure the UDF search path for
+    mydatabase so that `SELECT mysql.PI()` can be simplified to `SELECT PI()`.
+
+## Removing UDFs
+
+-   Use the DROP FUNCTION statement to delete a UDF:
+
+    DROP FUNCTION [function_name]; For example, DROP FUNCTION mysql.DEGREES;
+
+## Status of UDF package availability
+
+-   This UDF package is Generally Available (GA) for use on Cloud Spanner.
+
+## Limitations
+
+-   UDF functions may have some differences from the MySQL built-in function.
+    These differences, and limitations are available as comments in the
+    [mysql_udfs.sql](https://github.com/googleapis/spanner-sql-udf/blob/main/mysql/mysql_udfs.sql)
+    file.
 
 ## Contribute
 
