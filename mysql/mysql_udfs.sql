@@ -13,7 +13,7 @@
 -- limitations under the License.
 
 -- Defining schema that will contain all functions.
-CREATE OR REPLACE SCHEMA mysql;
+CREATE SCHEMA IF NOT EXISTS mysql;
 
 -- [START MYSQL_UDF_NUMERIC_DEGREES]
 -- NAME : DEGREES
